@@ -27,7 +27,6 @@ const toFormatted = json => {
             console.log(`${key} ${value}`);
         });
         lines.push(line);
-        console.log('-------------------');
     });
     return lines;
 }
