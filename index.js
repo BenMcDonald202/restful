@@ -13,9 +13,7 @@ app.get('/', (req, res) => {
   });
   
 app.get('/reformatted', (req, res) => {
-    const json = tools.toJson(req.body.csv);
-    const response = tools.toFormatted(json);
-    res.send(response);
+    res.send(tools.toFormatted(tools.toJson(req.body.csv)));
 });
 
 app.listen(port, () => {
