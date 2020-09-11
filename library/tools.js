@@ -21,12 +21,12 @@
 const toFormatted = json => {
     let lines = [];
     json.forEach(obj => {
-        let line;
+        let line = '';
         Object.entries(obj).forEach(([key, value]) => {
             line += `[${value}] `
             console.log(`${key} ${value}`);
         });
-        lines.push(line);
+        lines.push(line.trim());
     });
     return lines;
 }
