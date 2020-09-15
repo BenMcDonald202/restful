@@ -1,22 +1,28 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const tools = require('./library/tools')
+const tools = require("./lib/convert");
 
-app.use(express.urlencoded({extended: true})); 
-app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-const hostname = '127.0.0.1';
+const hostname = "127.0.0.1";
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Developer Candidate Take Home Test');
-  });
-  
-app.get('/reformatted', (req, res) => {
-    res.send(tools.toFormatted(tools.toJson(req.body.csv)));
+app.get("/", (req, res) => {
+  res.send("Developer Candidate Take Home Test");
+});
+
+app.get("/convert", async (req, res) => {
+  let result;
+  try {
+    result = tools.encode(await tools.decode(req.body.csv));
+  } catch (error) {
+    res.status(500).json({ error: error.toString() });
+  }
+  res.send(result);
 });
 
 app.listen(port, () => {
-    console.log(`Serving running at http://${hostname}:${port}/`);
+  console.log(`Serving running at http://${hostname}:${port}/`);
 });
 
